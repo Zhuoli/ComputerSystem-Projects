@@ -1,0 +1,1 @@
+For this homework we are going to implement the cs5600fs file system, a simple derivative of the MSDOS FAT file system. We will use the FUSE toolkit in Linux to implement the file system as a userspace process
