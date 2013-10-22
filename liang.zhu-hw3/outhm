@@ -1,0 +1,43 @@
+/*
+ * file:        homework.c
+ * description: skeleton file for CS 5600 homework 3
+ *
+ * CS 5600, Computer Systems, Northeastern CCIS
+ * Peter Desnoyers, updated April 2012
+ * $Id: homework.c 452 2011-11-28 22:25:31Z pjd $
+ */
+
+#define FUSE_USE_VERSION 27
+
+#include <stdlib.h>
+#include <stddef.h>
+#include <unistd.h>
+#include <fuse.h>
+#include <fcntl.h>
+#include <string.h>
+#include <stdio.h>
+#include <errno.h>
+
+#include "cs5600fs.h"
+#include "blkdev.h"
+#include <time.h>
+
+/* 
+ * disk access - the global variable 'disk' points to a blkdev
+ * structure which has been initialized to access the image file.
+ *
+ * NOTE - blkdev access is in terms of 512-byte SECTORS, while the
+ * file system uses 1024-byte BLOCKS. Remember to multiply everything
+ * by 2.
+ */
+
+extern struct blkdev *disk;
+struct cs5600fs_super *super = NULL;
+struct cs5600fs_entry *fat = NULL;
+char *cpath = NULL;  // source path
+char *dpath = NULL;  // destination path
+char *strwrd(char*,char*, size_t,char*);  // split string by token '/'
+char *databuf = NULL; // store one block of data
+char *datapool = NULL;// store all the dada
+char *x_buf = NULL;; // store the data to be writen in one block
+char *loc_buf = NULL; // local buffer to
