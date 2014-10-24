@@ -1,1 +1,1 @@
-Several course projects of Computer System done before
+Several course projects of Computer System
